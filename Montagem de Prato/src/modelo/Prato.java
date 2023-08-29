@@ -14,6 +14,7 @@ public class Prato {
 	
 	public Prato(String nome, Carne carne) {
 		this.id = Util.gerarIdPrato();
+		this.nome = nome;
 		this.carne = carne;
 		this.acompanhamentos = new ArrayList<>();
 	}
@@ -21,7 +22,6 @@ public class Prato {
 	public Acompanhamento localizar(String nome) {
 		Acompanhamento out = null;
 		
-		acompanhamentos.forEach(null);
 		for (Acompanhamento i : acompanhamentos) {
 			if (i.getNome().equalsIgnoreCase(nome)) out = i;
 		}
@@ -62,7 +62,7 @@ public class Prato {
 	
 	@Override
 	public String toString() {
-		String text = "id : " + id + "nome " + nome + " carne : " + carne + " acompanhamentos : [ ";
+		String text = "id : " + id + "\nnome : " + nome + "\n" + carne + "\n";
 		for (Acompanhamento a : acompanhamentos) {
 			text += a + " ";
 		}

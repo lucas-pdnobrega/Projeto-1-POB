@@ -26,13 +26,13 @@ public class Util {
 		config.common().messageLevel(0);  // mensagens na tela 0(desliga),1,2,3...
 		
 		// habilitar cascata para alterar, apagar e recuperar objetos
-		config.common().objectClass(Prato.class).cascadeOnDelete(true);;
-		config.common().objectClass(Prato.class).cascadeOnUpdate(true);;
+		config.common().objectClass(Prato.class).cascadeOnDelete(false);
+		config.common().objectClass(Prato.class).cascadeOnUpdate(true);
 		config.common().objectClass(Prato.class).cascadeOnActivate(true);
-		config.common().objectClass(Carne.class).cascadeOnDelete(true);;
-		config.common().objectClass(Carne.class).cascadeOnUpdate(true);;
+		config.common().objectClass(Carne.class).cascadeOnDelete(true);
+		config.common().objectClass(Carne.class).cascadeOnUpdate(true);
 		config.common().objectClass(Carne.class).cascadeOnActivate(true);
-		config.common().objectClass(Acompanhamento.class).cascadeOnDelete(true);;
+		config.common().objectClass(Acompanhamento.class).cascadeOnDelete(false);;
 		config.common().objectClass(Acompanhamento.class).cascadeOnUpdate(true);;
 		config.common().objectClass(Acompanhamento.class).cascadeOnActivate(true);
 		

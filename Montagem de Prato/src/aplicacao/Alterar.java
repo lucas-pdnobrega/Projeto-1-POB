@@ -24,32 +24,29 @@ public class Alterar {
 	}
 
 	public void atualizar(){
-		//localizar pessoa com nome joao
+		//Alterar preço de acompanhamento purê de batata
 		Query q = manager.query();
-		q.constrain(Carne.class);  				
-		q.descend("nome").constrain("Bife");		 
-		List<Carne> resultados = q.execute(); // select p from Carne p where p.nome="Bife"
+		q.constrain(Prato.class);
+		q.descend("nome").constrain("Rabo a la Bezerra");
+		List<Prato> resultados = q.execute();
 		
-	/**	if(resultados.size()>0) {
-			Pessoa p =  resultados.get(0);
-			p.setNome("joana");
-			
+		if(resultados.size()>0) {
+			Prato p =  resultados.get(0);
+
 			//adicionar novo telefone
-			p.adicionar(new Telefone("99999999"));
-			
+			p.adicionar(new Acompanhamento("Palmito", 1.22));
+
 			//remover telefone existente
-			Telefone t = p.localizar("88881100");
-			p.remover(t);  
-			t.setPessoa(null);	 	//este objeto pode ficar� orfao no banco 
+			Acompanhamento a = p.localizar("Batata Sauteé");
+			p.remover(a.getNome());  
 
 			manager.store(p);
-			manager.store(t);	
-			manager.delete(t);	//deletar objeto orfao no banco 
+			manager.store(a);
 			manager.commit();
-			System.out.println("alterou nome e telefones de joao");
+			System.out.println("adicionou Palmito e tirou Batata Sauteé de Rabo a la Bezerra");
 		}
 		else
-			System.out.println("joao inexistente"); **/
+			System.out.println("batata inexistente");
 	}
 
 

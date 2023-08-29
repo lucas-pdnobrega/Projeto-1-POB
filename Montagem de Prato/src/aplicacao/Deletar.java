@@ -21,18 +21,17 @@ public class Deletar {
 	}
 
 	public void apagar() {
-		//localizar pessoa com nome joana
 		Query q = manager.query();
 		q.constrain(Carne.class);
-		q.descend("nome").constrain("Bife");
-		List<Carne> resultados = q.execute(); // select p from Carne p where p.nome="Bife"
+		q.descend("nome").constrain("Lombinho");
+		List<Carne> resultados = q.execute(); // select p from Carne p where p.nome="Lombinho"
 
 		if (resultados.size() > 0) {
 			//apagar Bife
-			Carne p = resultados.get(0);
-			manager.delete(p);
+			Carne c = resultados.get(0);
+			manager.delete(c);
 			manager.commit();
-			System.out.println("apagou Bife e seus pratos (cascata)");
+			System.out.println("apagou Lombinho e seus pratos (cascata)");
 		} else
 			System.out.println("carne inexistente");
 	}
