@@ -68,6 +68,13 @@ public class Prato {
 		this.carne = carne;
 	}
 	
+	public List<Acompanhamento> getAcompanhamentos() {
+		return acompanhamentos;
+	}
+
+	public void setAcompanhamentos(List<Acompanhamento> acompanhamentos) {
+		this.acompanhamentos = acompanhamentos;
+	}
 	@Override
 	public String toString() {
 		String text = "id : " + id + "\nnome : " + nome + "\n" + carne + "\n";

@@ -120,7 +120,14 @@ public class Cadastrar {
 		manager.store(p3);		
 		manager.commit();		
 		
-			
+		Prato p4;
+		p4 = new Prato("Linguiça Completa Estrela", c6);
+		p4.adicionar(a3);
+		p4.adicionar(a8);
+		p4.adicionar(a7);
+		manager.store(p4);		
+		manager.commit();	
+
 		System.out.println("cadastrou.");
 
 	}	

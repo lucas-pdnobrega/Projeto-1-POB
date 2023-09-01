@@ -3,6 +3,8 @@ package aplicacao;
 import java.util.List;
 
 import com.db4o.ObjectContainer;
+import com.db4o.query.Candidate;
+import com.db4o.query.Evaluation;
 import com.db4o.query.Query;
 
 import modelo.Acompanhamento;
@@ -16,6 +18,7 @@ public class Consultar {
 		consultarPrecoAcompanhamento(3.68);
 		consultarNomeAcompanhamento("Purê de Batata");
 		consultarCarneNome("Rabo");
+		consultarPratosComMaisDeDoisAcompanhamentos();
 		Util.desconectar();
 		
 		System.out.println("\n\n aviso: feche sempre o plugin OME antes de executar aplicação");
@@ -61,6 +64,18 @@ public class Consultar {
 		System.out.println("FIM");
 	}
 	
+	public void consultarPratosComMaisDeDoisAcompanhamentos() {
+		System.out.println("\n---Pratos com mais de Dois Acompanhamentos");
+		Query p = manager.query();
+		p.constrain(Prato.class);  
+		p.constrain(new Filtro());
+		List<Prato >r = p.execute();
+		
+		for(Prato livro: r) {
+			System.out.println(livro);
+		}
+		System.out.println("FIM");
+	}
 	
 	//=================================================
 		public static void main(String[] args) {
@@ -68,3 +83,18 @@ public class Consultar {
 		}
 
 }
+
+//classe interna 
+class Filtro implements Evaluation {
+
+	public void evaluate(Candidate candidate) {
+		//destacar o objeto que esta sendo consultado no banco
+		Prato prato = (Prato) candidate.getObject();
+		
+		if(prato.getAcompanhamentos().size()>2) 
+			candidate.include(true); 	//incluir objeto no resultado da consulta
+		else		
+			candidate.include(false);	//excluir objeto do resultado da consulta
+	}
+}
+
