@@ -65,14 +65,14 @@ public class Consultar {
 	}
 	
 	public void consultarPratosComMaisDeDoisAcompanhamentos() {
-		System.out.println("\n---Pratos com mais de Dois Acompanhamentos");
-		Query p = manager.query();
-		p.constrain(Prato.class);  
-		p.constrain(new Filtro());
-		List<Prato >r = p.execute();
-		
-		for(Prato livro: r) {
-			System.out.println(livro);
+		//quais pratos possuem mais de dois acompanhamentos
+		Query q = manager.query();
+		q.constrain(Prato.class);  
+		q.constrain(new Filtro());
+		List<Prato >r = q.execute();
+		System.out.println("Pratos com mais de Dois Acompanhamentos");
+		for(Prato p: r) {
+			System.out.println(p);
 		}
 		System.out.println("FIM");
 	}

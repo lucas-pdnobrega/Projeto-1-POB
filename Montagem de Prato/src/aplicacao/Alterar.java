@@ -24,7 +24,7 @@ public class Alterar {
 	}
 
 	public void atualizar(){
-		//Alterar preço de acompanhamento purê de batata
+		//Alterar Acompanhamentos contidos no Prato Rabo a la Bezerra
 		Query q = manager.query();
 		q.constrain(Prato.class);
 		q.descend("nome").constrain("Rabo a la Bezerra");
@@ -33,10 +33,10 @@ public class Alterar {
 		if(resultados.size()>0) {
 			Prato p =  resultados.get(0);
 
-			//adicionar novo telefone
+			//adicionar novo Acompanhamento no Prato
 			p.adicionar(new Acompanhamento("Palmito", 1.22));
 
-			//remover telefone existente
+			//remover Acompanhamento do Prato
 			Acompanhamento a = p.localizar("Batata Sauteé");
 			p.remover(a.getNome());  
 
@@ -46,7 +46,7 @@ public class Alterar {
 			System.out.println("adicionou Palmito e tirou Batata Sauteé de Rabo a la Bezerra");
 		}
 		else
-			System.out.println("batata inexistente");
+			System.out.println("inexistente");
 	}
 
 
