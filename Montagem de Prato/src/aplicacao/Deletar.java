@@ -27,11 +27,11 @@ public class Deletar {
 		List<Carne> resultados = q.execute(); // select p from Carne p where p.nome="Lombinho"
 
 		if (resultados.size() > 0) {
-			//apagar Bife
+			//apagar Lombinho
 			Carne c = resultados.get(0);
 			manager.delete(c);
 			manager.commit();
-			System.out.println("apagou Lombinho e seus pratos (cascata)");
+			System.out.println("apagou Lombinho");
 		} else
 			System.out.println("carne inexistente");
 	}
