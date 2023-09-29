@@ -41,7 +41,7 @@ public class DAOPrato extends DAO<Prato>{
 	//--------------------------------------------
 	//  consultas
 	//--------------------------------------------
-		public void consultarCarneNome(String nome) {
+		public List<Prato> consultarCarneNome(String nome) {
 			//quais os pratos contendo carne de nome X
 			Query q = manager.query();
 			q.constrain(Prato.class);
@@ -52,9 +52,11 @@ public class DAOPrato extends DAO<Prato>{
 				System.out.println(p);
 			}
 			System.out.println("FIM");
+			
+			return r;
 		}
 		
-		public void consultarNomeAcompanhamento(String nome) {
+		public List<Prato> consultarNomeAcompanhamento(String nome) {
 			//quais os pratos contendo acompanhamento de nome X
 			Query q = manager.query();
 			q.constrain(Prato.class);
@@ -65,19 +67,23 @@ public class DAOPrato extends DAO<Prato>{
 				System.out.println(p);
 			}
 			System.out.println("FIM");
+			
+			return r;
 		}
 
-		public void consultarPratosComMaisDeDoisAcompanhamentos() {
+		public List<Prato> consultarPratosComMaisDeNAcompanhamentos(int quantidade) {
 			//quais pratos possuem mais de dois acompanhamentos
 			Query q = manager.query();
 			q.constrain(Prato.class);  
-			q.constrain(new Filtro());
+			q.constrain(new Filtro(quantidade));
 			List<Prato >r = q.execute();
-			System.out.println("Pratos com mais de Dois Acompanhamentos");
+			System.out.println("Pratos com mais de " + quantidade + " Acompanhamentos");
 			for(Prato p: r) {
 				System.out.println(p);
 			}
 			System.out.println("FIM");
+			
+			return r;
 		}
 		
 		
@@ -85,11 +91,17 @@ public class DAOPrato extends DAO<Prato>{
 }
 
 class Filtro implements Evaluation {
+	private int quantidade;
+			public Filtro(int quantidade) {
+				this.quantidade = quantidade;
+		// TODO Auto-generated constructor stub
+	}
+
 			public void evaluate(Candidate candidate) {
 				//destacar o objeto que esta sendo consultado no banco
 				Prato prato = (Prato) candidate.getObject();
 				
-				if(prato.getAcompanhamentos().size()>2) 
+				if(prato.getAcompanhamentos().size()>quantidade) 
 					candidate.include(true); 	//incluir objeto no resultado da consulta
 				else		
 					candidate.include(false);	//excluir objeto do resultado da consulta

@@ -31,7 +31,7 @@ public class DAOAcompanhamento extends DAO<Acompanhamento>{
 	//  consultas
 	//--------------------------------------------
 	
-	public void consultarPrecoAcompanhamento(double preco) {
+	public List<Acompanhamento> consultarPrecoAcompanhamento(double preco) {
 		//quais os acompanhamentos com preço X
 		Query q = manager.query();
 		q.constrain(Acompanhamento.class);
@@ -43,6 +43,8 @@ public class DAOAcompanhamento extends DAO<Acompanhamento>{
 			System.out.println(a);
 		}
 		System.out.println("FIM");
+		
+		return r;
 	}
 	
 }

@@ -49,7 +49,7 @@ public class Cadastrar {
 		manager.commit();
 		
 		Carne c6;
-		c6 = new Carne("Linguiça Toscana", 16.30);
+		c6 = new Carne("Linguiça Toscana", 14.99);
 		manager.store(c6);
 		manager.commit();
 			
