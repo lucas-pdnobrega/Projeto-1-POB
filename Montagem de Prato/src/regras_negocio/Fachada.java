@@ -61,13 +61,17 @@ public class Fachada {
 		return carne;
 	}
 	
-	public static Prato cadastrarPrato(String nome, Carne carne) throws Exception {
+	public static Prato cadastrarPrato(String nomePrato, String nomeCarne) throws Exception {
 		DAO.begin();
-		Prato prato = daoPrato.read(nome);
+		Prato prato = daoPrato.read(nomePrato);
 		if (prato!=null)
-			throw new Exception("Prato já cadastrado! " + nome);
-		prato = new Prato(nome, carne);
+			throw new Exception("Prato já cadastrado! " + nomePrato);
+		Carne carne = daoCarne.read(nomeCarne);
+		if (carne==null)
+			throw new Exception("Carne não existe! " + nomeCarne);
 		
+		prato = new Prato(nomePrato, carne);
+
 		daoPrato.create(prato);
 		DAO.commit();
 		

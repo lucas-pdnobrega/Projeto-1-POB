@@ -8,6 +8,7 @@
 package appconsole;
 
 import modelo.Acompanhamento;
+import modelo.Carne;
 import regras_negocio.Fachada;
 
 public class Cadastrar {
@@ -42,21 +43,27 @@ public class Cadastrar {
 		
 		try {
 			System.out.println("cadastrando prato...");
-			Fachada.cadastrarPrato("Lombinho a Palmeira", Fachada.localizarCarne("Lombinho"));
-			Fachada.cadastrarPrato("Rabo a la Bezerra", Fachada.localizarCarne("Rabo"));
-			Fachada.cadastrarPrato("Linguiça Estrela", Fachada.localizarCarne("Linguiça Toscana"));
-			Fachada.cadastrarPrato("Linguiça Completa Estrela", Fachada.localizarCarne("Linguiça Toscana"));
+	
+			Fachada.cadastrarPrato("Lombinho a Palmeira", "Lombinho");
+			Fachada.cadastrarPrato("Rabo a la Bezerra", "Rabo");
+			Fachada.cadastrarPrato("Linguiça Estrela", "Linguiça Toscana");
+			Fachada.cadastrarPrato("Linguiça Completa Estrela", "Linguiça Toscana");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
 		try {
 			System.out.println("adicionando acompanhamentos...");
-			Fachada.localizarPrato("Lombinho a Palmeira").adicionar(Fachada.localizarAcompanhamento("Salada Árabe"));
-			Fachada.localizarPrato("Rabo a la Bezerra").adicionar(Fachada.localizarAcompanhamento("Salada Árabe"));
-			Fachada.localizarPrato("Linguiça Estrela").adicionar(Fachada.localizarAcompanhamento("Arroz"));
-			Fachada.localizarPrato("Linguiça Completa Estrela").adicionar(Fachada.localizarAcompanhamento("Arroz"));
-			Fachada.localizarPrato("Linguiça Completa Estrela").adicionar(Fachada.localizarAcompanhamento("Ovo Cozido"));
+			
+			Acompanhamento salada = Fachada.localizarAcompanhamento("Salada Árabe");
+			Acompanhamento arroz = Fachada.localizarAcompanhamento("Arroz");
+			Acompanhamento ovo = Fachada.localizarAcompanhamento("Ovo Cozido");
+			
+			Fachada.localizarPrato("Lombinho a Palmeira").adicionar(salada);
+			Fachada.localizarPrato("Rabo a la Bezerra").adicionar(salada);
+			Fachada.localizarPrato("Linguiça Estrela").adicionar(arroz);
+			Fachada.localizarPrato("Linguiça Completa Estrela").adicionar(arroz);
+			Fachada.localizarPrato("Linguiça Completa Estrela").adicionar(ovo);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

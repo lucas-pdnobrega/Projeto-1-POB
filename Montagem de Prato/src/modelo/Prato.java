@@ -13,7 +13,6 @@ public class Prato {
 	private List<Acompanhamento> acompanhamentos;
 	
 	public Prato(String nome, Carne carne) {
-		this.id = Util.gerarIdPrato();
 		this.nome = nome;
 		this.carne = carne;
 		this.acompanhamentos = new ArrayList<>();

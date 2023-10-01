@@ -19,15 +19,15 @@ public class Listar {
 	public Listar() {
 		try {
 			Fachada.inicializar();
-			System.out.println("\n---listagem de carros:");
+			System.out.println("\n---listagem de carnes:");
 			for(Carne c: Fachada.listarCarnes())
 				System.out.println(c);
 
-			System.out.println("\n---listagem de clientes:");
+			System.out.println("\n---listagem de acompanhamentos:");
 			for(Acompanhamento a: Fachada.listarAcompanhamentos())
 				System.out.println(a);
 			
-			System.out.println("\n---listagem de alugueis:");
+			System.out.println("\n---listagem de prato:");
 			for(Prato p: Fachada.listarPrato())
 				System.out.println(p);
 		} catch (Exception e) {
