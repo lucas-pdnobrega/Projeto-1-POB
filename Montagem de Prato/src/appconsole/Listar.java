@@ -28,7 +28,7 @@ public class Listar {
 				System.out.println(a);
 			
 			System.out.println("\n---listagem de prato:");
-			for(Prato p: Fachada.listarPrato())
+			for(Prato p: Fachada.listarPratos())
 				System.out.println(p);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

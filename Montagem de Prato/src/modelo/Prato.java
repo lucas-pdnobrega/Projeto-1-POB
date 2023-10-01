@@ -38,9 +38,16 @@ public class Prato {
 			if (i.getNome().equalsIgnoreCase(nome)) {
 				out = i;
 				this.acompanhamentos.remove(i);
+				System.out.println(this.acompanhamentos);
 			}
 		}
 		return out;
+	}
+	
+	public List<Acompanhamento> esvaziar() {
+		List<Acompanhamento> saida = this.acompanhamentos;
+		this.acompanhamentos = new ArrayList<>();
+		return saida;
 	}
 
 	public int getId() {

@@ -94,6 +94,26 @@ public class Fachada {
 		DAO.commit();
 		}
 	
+	public static void removerAcompanhamentoPrato(String nomeAcompanhamento, String nomePrato) throws Exception {
+		DAO.begin();
+		
+		Acompanhamento acompanhamento = daoAcompanhamento.read(nomeAcompanhamento);
+		if (acompanhamento == null)
+			throw new Exception ("Acompanhamento não existe! " + nomeAcompanhamento);
+		
+		Prato prato = daoPrato.read(nomePrato);
+		if (prato == null)
+			throw new Exception ("Prato não existe! " + nomePrato);
+		
+		if (prato.localizar(nomeAcompanhamento) == null) {
+			throw new Exception ("Prato não possui acompanhamento " + nomeAcompanhamento);
+		}
+		
+		prato.remover(nomeAcompanhamento);
+		daoPrato.update(prato);
+		DAO.commit();
+		}
+	
 	public static void excluirAcompanhamento(String nome) throws Exception {
 		DAO.begin();
 		
@@ -101,11 +121,15 @@ public class Fachada {
 		if (acompanhamento == null)
 			throw new Exception ("Acompanhamento não existe! " + nome);
 		
-		List<Prato> pratos = Fachada.listarPrato();
+		System.out.println(acompanhamento);
+		
+		List<Prato> pratos = Fachada.listarPratos();
 		
 		for (Prato p : pratos) {
-			if (p.localizar(nome)!=null)
+			if (p.localizar(nome)!=null) {
 				p.remover(nome);
+				daoPrato.update(p);
+			}
 		}
 		
 		daoAcompanhamento.delete(acompanhamento);
@@ -119,11 +143,14 @@ public class Fachada {
 		if (carne == null)
 			throw new Exception ("Carne não existe! " + nome);
 		
-		List<Prato> pratos = Fachada.listarPrato();
+		System.out.println(carne);
+		
+		List<Prato> pratos = Fachada.listarPratos();
 		
 		for (Prato p : pratos) {
-			if (p.getCarne().getNome().equals(nome))
+			if (p.getCarne().getNome().equals(nome)) {
 				Fachada.excluirPrato(p.getNome());
+			}
 		}
 		
 		daoCarne.delete(carne);
@@ -137,14 +164,11 @@ public class Fachada {
 		if (prato == null)
 			throw new Exception ("Prato não existe! " + prato);
 		
-		List<Acompanhamento> aux = prato.getAcompanhamentos();
+		System.out.println(prato);
 		
 		//Remover todos acompanhamentos do prato alvo
-		for (Acompanhamento a : aux) {
-			prato.remover(a.getNome());
-			daoAcompanhamento.update(a);
-			daoPrato.update(prato);
-		}
+		prato.esvaziar();
+		daoPrato.update(prato);
 		
 		//Remover carne do prato
 		prato.setCarne(null);
@@ -168,7 +192,7 @@ public class Fachada {
 		return resultados;
 	}
 	
-	public static List<Prato> listarPrato() {
+	public static List<Prato> listarPratos() {
 		DAO.begin();
 		List<Prato> resultados = daoPrato.readAll();
 		DAO.commit();
@@ -185,6 +209,13 @@ public class Fachada {
 	public static List<Acompanhamento> acompanhamentosPreco(double preco) {
 		DAO.begin();
 		List<Acompanhamento> resultados = daoAcompanhamento.consultarPrecoAcompanhamento(preco);
+		DAO.commit();
+		return resultados;
+	}
+	
+	public static List<Prato> acompanhamentoPrato(String nome) {
+		DAO.begin();
+		List<Prato> resultados = daoPrato.consultarAcompanhamentoNome(nome);
 		DAO.commit();
 		return resultados;
 	}

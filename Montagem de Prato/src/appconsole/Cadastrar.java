@@ -7,15 +7,13 @@
 
 package appconsole;
 
-import modelo.Acompanhamento;
-import modelo.Carne;
 import regras_negocio.Fachada;
 
 public class Cadastrar {
 
 	public Cadastrar() {
+		Fachada.inicializar();
 		try {
-			Fachada.inicializar();
 			System.out.println("cadastrando acompanhamento...");
 			Fachada.cadastrarAcompanhamento("Batata Frita", 3.68);
 			Fachada.cadastrarAcompanhamento("Salada Árabe", 5.68);
@@ -43,11 +41,10 @@ public class Cadastrar {
 		
 		try {
 			System.out.println("cadastrando prato...");
-	
-			Fachada.cadastrarPrato("Lombinho a Palmeira", "Lombinho");
-			Fachada.cadastrarPrato("Rabo a la Bezerra", "Rabo");
-			Fachada.cadastrarPrato("Linguiça Estrela", "Linguiça Toscana");
-			Fachada.cadastrarPrato("Linguiça Completa Estrela", "Linguiça Toscana");
+			Fachada.cadastrarPrato("Lombinho a Palmeira","Lombinho");
+			Fachada.cadastrarPrato("Rabo a la Bezerra","Rabo");
+			Fachada.cadastrarPrato("Linguiça Estrela","Linguiça Toscana");
+			Fachada.cadastrarPrato("Linguiça Completa Estrela","Linguiça Toscana");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -55,15 +52,12 @@ public class Cadastrar {
 		try {
 			System.out.println("adicionando acompanhamentos...");
 			
-			Acompanhamento salada = Fachada.localizarAcompanhamento("Salada Árabe");
-			Acompanhamento arroz = Fachada.localizarAcompanhamento("Arroz");
-			Acompanhamento ovo = Fachada.localizarAcompanhamento("Ovo Cozido");
-			
-			Fachada.localizarPrato("Lombinho a Palmeira").adicionar(salada);
-			Fachada.localizarPrato("Rabo a la Bezerra").adicionar(salada);
-			Fachada.localizarPrato("Linguiça Estrela").adicionar(arroz);
-			Fachada.localizarPrato("Linguiça Completa Estrela").adicionar(arroz);
-			Fachada.localizarPrato("Linguiça Completa Estrela").adicionar(ovo);
+			Fachada.adicionarAcompanhamentoPrato("Salada Árabe", "Lombinho a Palmeira");
+			Fachada.adicionarAcompanhamentoPrato("Salada Árabe", "Rabo a la Bezerra");
+			Fachada.adicionarAcompanhamentoPrato("Arroz", "Linguiça Estrela");
+			Fachada.adicionarAcompanhamentoPrato("Arroz", "Linguiça Completa Estrela");
+			Fachada.adicionarAcompanhamentoPrato("Ovo Cozido", "Linguiça Completa Estrela");
+			Fachada.adicionarAcompanhamentoPrato("Batata Sauteé", "Linguiça Completa Estrela");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

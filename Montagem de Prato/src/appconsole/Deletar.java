@@ -8,13 +8,17 @@ package appconsole;
 
 import regras_negocio.Fachada;
 
-public class Alterar {
+public class Deletar {
 	
-	public Alterar() {
+	public Deletar() {
 		try {
 			Fachada.inicializar();
-			Fachada.removerAcompanhamentoPrato("Batata Sauteé", "Rabo a la Bezerra");
-			System.out.println("adicionou Palmito e tirou Batata Sauteé de Rabo a la Bezerra");
+			Fachada.excluirAcompanhamento("Ovo Cozido");
+			System.out.println("Excluiu Ovo Cozido");
+			Fachada.excluirCarne("Linguiça Toscana");
+			System.out.println("Excluiu Linguiça Toscana");
+			Fachada.excluirPrato("Lombinho a Palmeira");
+			System.out.println("Excluiu Lombinho a Palmeira");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -25,6 +29,6 @@ public class Alterar {
 	}
 
 	public static void main(String[] args) {
-		new Alterar();
+		new Deletar();
 	}
 }

@@ -38,12 +38,6 @@ public class DAOAcompanhamento extends DAO<Acompanhamento>{
 		q.descend("preco").constrain(preco);
 		List<Acompanhamento> r = q.execute();
 		
-		System.out.println("Acompanhamentos com preço " + preco);
-		for (Acompanhamento a : r) {
-			System.out.println(a);
-		}
-		System.out.println("FIM");
-		
 		return r;
 	}
 	

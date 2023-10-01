@@ -7,8 +7,8 @@
 
 package appconsole;
 
-import modelo.Aluguel;
-import modelo.Carro;
+import modelo.Acompanhamento;
+import modelo.Prato;
 import regras_negocio.Fachada;
 
 public class Consultar {
@@ -18,22 +18,24 @@ public class Consultar {
 			Fachada.inicializar();
 
 			System.out.println("consultas... \n");
-			System.out.println("\nalugueis de carro palio");
-			for(Aluguel a : Fachada.alugueisModelo("palio"))
+			System.out.println("\nacompanhentos que custam 3.68R$");
+			for(Acompanhamento a : Fachada.acompanhamentosPreco(3.68))
 				System.out.println(a);
 
 
-			System.out.println("\nalugueis finalizados");
-			for(Aluguel a : Fachada.alugueisFinalizados())
-				System.out.println(a);
-
-
-			System.out.println("\ncarros que possuem 1 alugueis");
-			for(Carro c : Fachada.carrosNAlugueis(1))
-				System.out.println(c);
-
-
-			//System.out.println("clientes que possuem 2 alugueis");
+			System.out.println("\npratos com acompanhamento Purê de Batata");
+			for(Prato p : Fachada.acompanhamentoPrato("Purê de Batata")) {
+				System.out.println(p);
+			}
+		
+			System.out.println("\npratos com carne Rabo");
+			for(Prato p : Fachada.carnePrato("Rabo")) {
+				System.out.println(p);
+			}
+			System.out.println("\npratos com mais de 2 acompanhamentos");
+			for(Prato p : Fachada.pratosNAcompanhamentos(2)) {
+				System.out.println(p);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

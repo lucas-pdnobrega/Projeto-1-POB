@@ -19,7 +19,7 @@ public class DAOPrato extends DAO<Prato>{
 	public Prato read (Object chave){
 		String nome = (String) chave;	//casting para o tipo da chave
 		Query q = manager.query();
-		q.constrain(Carne.class);
+		q.constrain(Prato.class);
 		q.descend("nome").constrain(nome);
 		List<Prato> resultados = q.execute();
 		if (resultados.size()>0)
@@ -47,26 +47,16 @@ public class DAOPrato extends DAO<Prato>{
 			q.constrain(Prato.class);
 			q.descend("carne").descend("nome").constrain(nome);
 			List<Prato> r = q.execute();
-			System.out.println("Pratos com carne de nome " + nome);
-			for (Prato p : r) {
-				System.out.println(p);
-			}
-			System.out.println("FIM");
 			
 			return r;
 		}
 		
-		public List<Prato> consultarNomeAcompanhamento(String nome) {
+		public List<Prato> consultarAcompanhamentoNome(String nome) {
 			//quais os pratos contendo acompanhamento de nome X
 			Query q = manager.query();
 			q.constrain(Prato.class);
 			q.descend("acompanhamentos").descend("nome").constrain(nome);
 			List<Prato> r = q.execute();
-			System.out.println("Pratos com acompanhamento de nome " + nome);
-			for (Prato p : r) {
-				System.out.println(p);
-			}
-			System.out.println("FIM");
 			
 			return r;
 		}
@@ -77,11 +67,6 @@ public class DAOPrato extends DAO<Prato>{
 			q.constrain(Prato.class);  
 			q.constrain(new Filtro(quantidade));
 			List<Prato >r = q.execute();
-			System.out.println("Pratos com mais de " + quantidade + " Acompanhamentos");
-			for(Prato p: r) {
-				System.out.println(p);
-			}
-			System.out.println("FIM");
 			
 			return r;
 		}
