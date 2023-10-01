@@ -17,10 +17,10 @@ import modelo.Prato;
 public class DAOPrato extends DAO<Prato>{
 
 	public Prato read (Object chave){
-		int id = (int) chave;	//casting para o tipo da chave
+		String nome = (String) chave;	//casting para o tipo da chave
 		Query q = manager.query();
 		q.constrain(Carne.class);
-		q.descend("id").constrain(id);
+		q.descend("nome").constrain(nome);
 		List<Prato> resultados = q.execute();
 		if (resultados.size()>0)
 			return resultados.get(0);
