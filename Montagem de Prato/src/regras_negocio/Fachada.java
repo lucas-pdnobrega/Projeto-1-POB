@@ -109,7 +109,7 @@ public class Fachada {
 			throw new Exception ("Prato não possui acompanhamento " + nomeAcompanhamento);
 		}
 		
-		prato.remover(nomeAcompanhamento);
+		prato.remover(acompanhamento);
 		daoPrato.update(prato);
 		DAO.commit();
 		}
@@ -127,7 +127,7 @@ public class Fachada {
 		
 		for (Prato p : pratos) {
 			if (p.localizar(nome)!=null) {
-				p.remover(nome);
+				p.remover(acompanhamento);
 				daoPrato.update(p);
 			}
 		}

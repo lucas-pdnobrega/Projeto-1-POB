@@ -13,8 +13,8 @@ public class Alterar {
 	public Alterar() {
 		try {
 			Fachada.inicializar();
-			Fachada.removerAcompanhamentoPrato("Batata Sauteé", "Rabo a la Bezerra");
-			System.out.println("adicionou Palmito e tirou Batata Sauteé de Rabo a la Bezerra");
+			Fachada.removerAcompanhamentoPrato("Salada Árabe", "Rabo a la Bezerra");
+			System.out.println("tirou Batata Sauteé de Rabo a la Bezerra");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

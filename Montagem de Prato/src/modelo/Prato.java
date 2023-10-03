@@ -3,8 +3,6 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import aplicacao.Util;
-
 public class Prato {
 	
 	private int id;
@@ -31,17 +29,8 @@ public class Prato {
 		this.acompanhamentos.add(acompanhamento);
 	}
 	
-	public Acompanhamento remover(String nome) {
-		Acompanhamento out = null;
-
-		for (Acompanhamento i : acompanhamentos) {
-			if (i.getNome().equalsIgnoreCase(nome)) {
-				out = i;
-				this.acompanhamentos.remove(i);
-				System.out.println(this.acompanhamentos);
-			}
-		}
-		return out;
+	public void remover(Acompanhamento acompanhamento) {
+		this.acompanhamentos.remove(acompanhamento);
 	}
 	
 	public List<Acompanhamento> esvaziar() {
