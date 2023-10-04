@@ -3,8 +3,6 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import aplicacao.Util;
-
 public class Prato {
 	
 	private int id;
@@ -13,7 +11,6 @@ public class Prato {
 	private List<Acompanhamento> acompanhamentos;
 	
 	public Prato(String nome, Carne carne) {
-		this.id = Util.gerarIdPrato();
 		this.nome = nome;
 		this.carne = carne;
 		this.acompanhamentos = new ArrayList<>();
@@ -32,16 +29,14 @@ public class Prato {
 		this.acompanhamentos.add(acompanhamento);
 	}
 	
-	public Acompanhamento remover(String nome) {
-		Acompanhamento out = null;
-
-		for (Acompanhamento i : acompanhamentos) {
-			if (i.getNome().equalsIgnoreCase(nome)) {
-				out = i;
-				this.acompanhamentos.remove(i);
-			}
-		}
-		return out;
+	public void remover(Acompanhamento acompanhamento) {
+		this.acompanhamentos.remove(acompanhamento);
+	}
+	
+	public List<Acompanhamento> esvaziar() {
+		List<Acompanhamento> saida = this.acompanhamentos;
+		this.acompanhamentos = new ArrayList<>();
+		return saida;
 	}
 
 	public int getId() {
