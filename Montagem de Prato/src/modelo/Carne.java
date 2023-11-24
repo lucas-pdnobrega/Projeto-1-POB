@@ -1,9 +1,20 @@
 package modelo;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
 public class Carne {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
 	private String nome;
 	private double preco;
 	
+	public Carne() {}
+ 	
 	public Carne (String nome, double preco) {
 		this.nome = nome;
 		this.preco = preco;

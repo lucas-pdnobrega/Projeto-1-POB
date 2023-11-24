@@ -3,12 +3,26 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+
+@Entity
 public class Prato {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String nome;
+	@ManyToMany(mappedBy="carne", fetch=FetchType.LAZY)
 	private Carne carne;
+	@ManyToMany(mappedBy="prato", fetch=FetchType.LAZY)
 	private List<Acompanhamento> acompanhamentos;
+	
+	public Prato() {}
 	
 	public Prato(String nome, Carne carne) {
 		this.nome = nome;
