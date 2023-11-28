@@ -61,8 +61,11 @@ public class Util {
 				}
 				// -----------------------------------------------------------------------------------
 				String unit_name = "hibernate" + "-" + sgbd;
+				System.out.println(unit_name);
+				System.out.println(configuracoes);
 				factory = Persistence.createEntityManagerFactory(unit_name, configuracoes);
 				manager = factory.createEntityManager();
+				System.out.println("passou");
 
 			} catch (Exception e) {
 				logger.info("Util.conectar - problema de configuracao: " + e.getMessage());
@@ -74,6 +77,7 @@ public class Util {
 
 	public static void fecharBanco() {
 		if (manager != null && manager.isOpen()) {
+			System.out.println("fechando");
 			manager.close();
 			factory.close();
 			manager = null;

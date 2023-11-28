@@ -3,31 +3,31 @@
  * POB - Persistencia de Objetos
  * Prof. Fausto Ayres
  **********************************/
-
 package daojpa;
 
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
-import modelo.Usuario;
+import modelo.Prato;
 
-public class DAOUsuario extends DAO<Usuario>{
+import java.util.List;
 
-	public Usuario read(Object chave) {
-		try {
+public class DAOPrato extends DAO<Prato>{
+
+	public Prato read (Object chave){
+		try{
 			String nome = (String) chave;
-			TypedQuery<Usuario> q = manager.createQuery("select u from Usuario u where u.nome=:n", Usuario.class);
+			TypedQuery<Prato> q = manager.createQuery("select p from Prato p where p.nome = :n ",Prato.class);
 			q.setParameter("n", nome);
-			Usuario u = q.getSingleResult();
-			return u;
-		} catch (NoResultException e) {
+
+			return q.getSingleResult();
+		}catch(NoResultException e){
 			return null;
 		}
 	}
-
 
 	//--------------------------------------------
 	//  consultas
 	//--------------------------------------------
 	
+	
 }
-

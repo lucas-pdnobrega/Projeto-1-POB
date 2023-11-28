@@ -3,12 +3,18 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Prato {
@@ -16,10 +22,22 @@ public class Prato {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
+	
+	@Column(unique=true)
 	private String nome;
-	@ManyToMany(mappedBy="carne", fetch=FetchType.LAZY)
+
+	@JoinTable(name="prato_carne", 
+			joinColumns = @JoinColumn(name = "prato_id_fk"),
+			inverseJoinColumns= @JoinColumn(name = "carne_id_fk"))
+	@ManyToOne(targetEntity=Carne.class)
 	private Carne carne;
-	@ManyToMany(mappedBy="prato", fetch=FetchType.LAZY)
+
+	@JoinTable(
+			name="prato_acompanhamento", 
+			joinColumns = @JoinColumn(name = "prato_id_fk"),
+			inverseJoinColumns= @JoinColumn(name = "acompanhamento_id_fk")
+	)
+	@ManyToMany(targetEntity=Acompanhamento.class)
 	private List<Acompanhamento> acompanhamentos;
 	
 	public Prato() {}

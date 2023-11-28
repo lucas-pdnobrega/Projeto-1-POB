@@ -8,11 +8,11 @@ package regras_negocio;
 
 import java.util.List;
 
-import daodb4o.DAO;
-import daodb4o.DAOAcompanhamento;
-import daodb4o.DAOCarne;
-import daodb4o.DAOPrato;
-import daodb4o.DAOUsuario;
+import daojpa.DAO;
+import daojpa.DAOAcompanhamento;
+import daojpa.DAOCarne;
+import daojpa.DAOPrato;
+import daojpa.DAOUsuario;
 import modelo.Acompanhamento;
 import modelo.Carne;
 import modelo.Prato;
@@ -71,8 +71,11 @@ public class Fachada {
 			throw new Exception("Carne não existe! " + nomeCarne);
 		
 		prato = new Prato(nomePrato, carne);
+		
+		System.out.println(prato);
 
 		daoPrato.create(prato);
+		System.out.println("criou");
 		DAO.commit();
 		
 		return prato;
@@ -205,14 +208,14 @@ public class Fachada {
 		DAO.commit();
 		return resultados;
 	} 
-	
+
+	/*
 	public static List<Acompanhamento> acompanhamentosPreco(double preco) {
 		DAO.begin();
 		List<Acompanhamento> resultados = daoAcompanhamento.consultarPrecoAcompanhamento(preco);
 		DAO.commit();
 		return resultados;
 	}
-	
 	public static List<Prato> acompanhamentoPrato(String nome) {
 		DAO.begin();
 		List<Prato> resultados = daoPrato.consultarAcompanhamentoNome(nome);
@@ -232,7 +235,7 @@ public class Fachada {
 		List<Prato> resultados = daoPrato.consultarPratosComMaisDeNAcompanhamentos(quantidade);
 		DAO.commit();
 		return resultados;
-	}
+	}*/
 	
 	public static Acompanhamento localizarAcompanhamento(String nome) {
 		return daoAcompanhamento.read(nome);
