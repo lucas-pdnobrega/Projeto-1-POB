@@ -209,13 +209,13 @@ public class Fachada {
 		return resultados;
 	} 
 
-	/*
 	public static List<Acompanhamento> acompanhamentosPreco(double preco) {
 		DAO.begin();
 		List<Acompanhamento> resultados = daoAcompanhamento.consultarPrecoAcompanhamento(preco);
 		DAO.commit();
 		return resultados;
 	}
+	/*
 	public static List<Prato> acompanhamentoPrato(String nome) {
 		DAO.begin();
 		List<Prato> resultados = daoPrato.consultarAcompanhamentoNome(nome);

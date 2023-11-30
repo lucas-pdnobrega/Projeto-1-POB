@@ -32,6 +32,12 @@ public class DAOAcompanhamento extends DAO<Acompanhamento>{
 	//--------------------------------------------
 	//  consulta - Fausto pediu para aguardar
 	//--------------------------------------------
-	
+	public List<Acompanhamento> consultarPrecoAcompanhamento(double preco) {
+        // quais os acompanhamentos com preço n
+        TypedQuery<Acompanhamento> q = manager.createQuery("SELECT a FROM Acompanhamento a WHERE a.preco = :preco", Acompanhamento.class);
+        q.setParameter("preco", preco);
+
+        return q.getResultList();
+    }
 
 }
