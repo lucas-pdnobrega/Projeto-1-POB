@@ -215,7 +215,7 @@ public class Fachada {
 		DAO.commit();
 		return resultados;
 	}
-	/*
+	
 	public static List<Prato> acompanhamentoPrato(String nome) {
 		DAO.begin();
 		List<Prato> resultados = daoPrato.consultarAcompanhamentoNome(nome);
@@ -235,7 +235,7 @@ public class Fachada {
 		List<Prato> resultados = daoPrato.consultarPratosComMaisDeNAcompanhamentos(quantidade);
 		DAO.commit();
 		return resultados;
-	}*/
+	}
 	
 	public static Acompanhamento localizarAcompanhamento(String nome) {
 		return daoAcompanhamento.read(nome);
