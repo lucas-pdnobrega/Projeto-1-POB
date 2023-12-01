@@ -29,6 +29,13 @@ public class DAOPrato extends DAO<Prato>{
 			return null;
 		}
 	}
+	
+	public List<Prato> readAll(){
+		TypedQuery<Prato> p = manager.createQuery("select p from Prato p "
+				+ "JOIN FETCH p.carne  "
+				+ "LEFT JOIN FETCH p.acompanhamentos order by p.id", Prato.class);
+		return  p.getResultList();
+	}
 
 	//--------------------------------------------
 	//  consultas
@@ -37,8 +44,8 @@ public class DAOPrato extends DAO<Prato>{
 	public List<Prato> consultarCarneNome(String nome) {
 		//quais os pratos contendo carne de nome X
 		TypedQuery<Prato> q = manager.createQuery("SELECT p FROM Prato p "
-      	      + "JOIN FETCH p.carne c "
-      	      + "WHERE c.nome = :nome",
+			  + "LEFT JOIN FETCH p.acompanhamentos a "
+			  + "JOIN FETCH p.carne c WHERE c.nome = :nome",
       	        Prato.class);
       q.setParameter("nome", nome);
       return q.getResultList();
@@ -63,6 +70,8 @@ public class DAOPrato extends DAO<Prato>{
 	public List<Prato> consultarPratosComMaisDeNAcompanhamentos(int quantidade) {
 		//quais pratos possuem mais de dois acompanhamentos
 		TypedQuery<Prato> q = manager.createQuery("SELECT p FROM Prato p "
+                 + "LEFT JOIN FETCH p.acompanhamentos a "
+				 + "JOIN FETCH p.carne c "
 				 + "WHERE (SELECT COUNT(a) FROM p.acompanhamentos a) > 2",
 		        Prato.class);
 

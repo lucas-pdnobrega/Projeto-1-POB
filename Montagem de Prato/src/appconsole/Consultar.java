@@ -25,17 +25,17 @@ public class Consultar {
 			
 			System.out.println("\npratos com acompanhamento Arroz");
 			for(Prato p : Fachada.acompanhamentoPrato("Arroz")) {
-				System.out.println(p.getNome());
+				System.out.println(p);
 			}
 			
 			System.out.println("\npratos com carne Rabo");
 			for(Prato p : Fachada.carnePrato("Rabo")) {
-				System.out.println(p.getNome());
+				System.out.println(p);
 			}
 			
 			System.out.println("\npratos com mais de 2 acompanhamentos");
 			for(Prato p : Fachada.pratosNAcompanhamentos(2)) {
-				System.out.println(p.getNome());
+				System.out.println(p);
 			}
 			
 		} catch (Exception e) {
