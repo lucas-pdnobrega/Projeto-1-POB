@@ -26,7 +26,6 @@ public class Prato {
 	
 	@Column(unique=true)
 	private String nome;
-
 	@JoinTable(name="prato_carne", 
 			joinColumns = @JoinColumn(name = "prato_id_fk"),
 			inverseJoinColumns= @JoinColumn(name = "carne_id_fk"))

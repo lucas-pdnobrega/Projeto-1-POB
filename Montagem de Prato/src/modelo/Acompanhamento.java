@@ -11,7 +11,6 @@ public class Acompanhamento {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
-	
 	@Column(unique=true)
 	private String nome;
 	private double preco;
