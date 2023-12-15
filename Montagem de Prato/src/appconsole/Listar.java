@@ -7,7 +7,6 @@
 
 package appconsole;
 
-import daodb4o.Util;
 import modelo.Acompanhamento;
 import modelo.Carne;
 import modelo.Prato;
@@ -33,8 +32,6 @@ public class Listar {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-
-		Util.desconectar();
 		System.out.println("\nfim do programa !");
 	}
 
