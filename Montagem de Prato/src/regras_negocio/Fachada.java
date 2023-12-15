@@ -8,11 +8,11 @@ package regras_negocio;
 
 import java.util.List;
 
-import daodb4o.DAO;
-import daodb4o.DAOAcompanhamento;
-import daodb4o.DAOCarne;
-import daodb4o.DAOPrato;
-import daodb4o.DAOUsuario;
+import daojpa.DAO;
+import daojpa.DAOAcompanhamento;
+import daojpa.DAOCarne;
+import daojpa.DAOPrato;
+import daojpa.DAOUsuario;
 import modelo.Acompanhamento;
 import modelo.Carne;
 import modelo.Prato;
@@ -71,8 +71,11 @@ public class Fachada {
 			throw new Exception("Carne não existe! " + nomeCarne);
 		
 		prato = new Prato(nomePrato, carne);
+		
+		System.out.println(prato);
 
 		daoPrato.create(prato);
+		System.out.println("criou");
 		DAO.commit();
 		
 		return prato;
@@ -118,21 +121,18 @@ public class Fachada {
 		DAO.begin();
 		
 		Acompanhamento acompanhamento = daoAcompanhamento.read(nome);
+		
 		if (acompanhamento == null)
 			throw new Exception ("Acompanhamento não existe! " + nome);
-		
 		System.out.println(acompanhamento);
-		
 		List<Prato> pratos = Fachada.listarPratos();
-		
 		for (Prato p : pratos) {
 			if (p.localizar(nome)!=null) {
 				p.remover(acompanhamento);
 				daoPrato.update(p);
 			}
 		}
-		
-		daoAcompanhamento.delete(acompanhamento);
+		daoAcompanhamento.delete(nome);
 		DAO.commit();
 	}
 	
@@ -149,17 +149,16 @@ public class Fachada {
 		
 		for (Prato p : pratos) {
 			if (p.getCarne().getNome().equals(nome)) {
-				Fachada.excluirPrato(p.getNome());
+				String nomePrato = p.getNome();
+				Fachada.excluirPrato(nomePrato);
 			}
 		}
-		
-		daoCarne.delete(carne);
+		daoCarne.delete(nome);
 		DAO.commit();
 	}
 	
 	public static void excluirPrato(String nome) throws Exception {
 		DAO.begin();
-		
 		Prato prato = daoPrato.read(nome);
 		if (prato == null)
 			throw new Exception ("Prato não existe! " + prato);
@@ -174,7 +173,7 @@ public class Fachada {
 		prato.setCarne(null);
 		
 		daoPrato.update(prato);
-		daoPrato.delete(prato);
+		daoPrato.delete(nome);
 		DAO.commit();
 	}
 	
@@ -205,7 +204,7 @@ public class Fachada {
 		DAO.commit();
 		return resultados;
 	} 
-	
+
 	public static List<Acompanhamento> acompanhamentosPreco(double preco) {
 		DAO.begin();
 		List<Acompanhamento> resultados = daoAcompanhamento.consultarPrecoAcompanhamento(preco);
