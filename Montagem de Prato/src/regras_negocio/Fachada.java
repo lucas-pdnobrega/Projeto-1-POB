@@ -121,21 +121,18 @@ public class Fachada {
 		DAO.begin();
 		
 		Acompanhamento acompanhamento = daoAcompanhamento.read(nome);
+		
 		if (acompanhamento == null)
 			throw new Exception ("Acompanhamento não existe! " + nome);
-		
 		System.out.println(acompanhamento);
-		
 		List<Prato> pratos = Fachada.listarPratos();
-		
 		for (Prato p : pratos) {
 			if (p.localizar(nome)!=null) {
 				p.remover(acompanhamento);
 				daoPrato.update(p);
 			}
 		}
-		
-		daoAcompanhamento.delete(acompanhamento);
+		daoAcompanhamento.delete(nome);
 		DAO.commit();
 	}
 	
@@ -152,17 +149,16 @@ public class Fachada {
 		
 		for (Prato p : pratos) {
 			if (p.getCarne().getNome().equals(nome)) {
-				Fachada.excluirPrato(p.getNome());
+				String nomePrato = p.getNome();
+				Fachada.excluirPrato(nomePrato);
 			}
 		}
-		
-		daoCarne.delete(carne);
+		daoCarne.delete(nome);
 		DAO.commit();
 	}
 	
 	public static void excluirPrato(String nome) throws Exception {
 		DAO.begin();
-		
 		Prato prato = daoPrato.read(nome);
 		if (prato == null)
 			throw new Exception ("Prato não existe! " + prato);
@@ -177,7 +173,7 @@ public class Fachada {
 		prato.setCarne(null);
 		
 		daoPrato.update(prato);
-		daoPrato.delete(prato);
+		daoPrato.delete(nome);
 		DAO.commit();
 	}
 	

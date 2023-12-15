@@ -41,8 +41,11 @@ public abstract class DAO<T> implements DAOInterface<T> {
 	public T update(T obj){
 		return manager.merge(obj);
 	}
-	public void delete(T obj) {
+	public void delete(Object chave) {
+		DAO.begin();
+		T obj = this.read(chave);
 		manager.remove(obj);
+		DAO.commit();
 	}
 
 
@@ -77,7 +80,7 @@ public abstract class DAO<T> implements DAOInterface<T> {
 	}
 
 
-	//----------------------- TRANSAÇÃO   ----------------------
+	//----------------------- TRANSAï¿½ï¿½O   ----------------------
 	public static void begin(){
 		if(!manager.getTransaction().isActive())
 			manager.getTransaction().begin();
@@ -98,7 +101,7 @@ public abstract class DAO<T> implements DAOInterface<T> {
 		manager.lock(obj, LockModeType.PESSIMISTIC_WRITE); 
 	}
 
-	// acesso direto a classe de conexão jdbc
+	// acesso direto a classe de conexï¿½o jdbc
 	public static Connection getConnectionJdbc() {
 		try {
 			EntityManagerFactory factory = manager.getEntityManagerFactory();

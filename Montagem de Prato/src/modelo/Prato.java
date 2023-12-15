@@ -3,6 +3,7 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -29,7 +30,8 @@ public class Prato {
 	@JoinTable(name="prato_carne", 
 			joinColumns = @JoinColumn(name = "prato_id_fk"),
 			inverseJoinColumns= @JoinColumn(name = "carne_id_fk"))
-	@ManyToOne(targetEntity=Carne.class)
+	@ManyToOne(targetEntity=Carne.class, 
+               cascade={CascadeType.PERSIST, CascadeType.ALL})
 	private Carne carne;
 
 	@JoinTable(
@@ -37,7 +39,8 @@ public class Prato {
 			joinColumns = @JoinColumn(name = "prato_id_fk"),
 			inverseJoinColumns= @JoinColumn(name = "acompanhamento_id_fk")
 	)
-	@ManyToMany(targetEntity=Acompanhamento.class)
+	@ManyToMany(targetEntity=Acompanhamento.class, 
+	            cascade={CascadeType.PERSIST, CascadeType.MERGE})
 	private List<Acompanhamento> acompanhamentos;
 	
 	public Prato() {}

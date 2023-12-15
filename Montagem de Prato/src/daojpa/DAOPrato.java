@@ -72,7 +72,7 @@ public class DAOPrato extends DAO<Prato>{
 		TypedQuery<Prato> q = manager.createQuery("SELECT p FROM Prato p "
                  + "LEFT JOIN FETCH p.acompanhamentos a "
 				 + "JOIN FETCH p.carne c "
-				 + "WHERE (SELECT COUNT(a) FROM p.acompanhamentos a) > 2",
+				 + "WHERE (SELECT COUNT(a) FROM p.acompanhamentos a) > " + quantidade,
 		        Prato.class);
 
 		    return q.getResultList();
